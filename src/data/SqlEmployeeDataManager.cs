@@ -43,7 +43,7 @@ namespace EmployeeManagement.data
             return employee;
         }
 
-        public Employee Delete(int id)
+        public void Delete(int id)
         {
            Employee employee = _context.Employees.Find(id);
            if (employee != null)
@@ -51,8 +51,6 @@ namespace EmployeeManagement.data
                _context.Employees.Remove(employee);
                _context.SaveChanges();
            }
-
-           return employee;
         }
     }
 }

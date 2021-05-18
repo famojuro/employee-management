@@ -49,15 +49,13 @@ namespace EmployeeManagement.data
             return updatedEmployee;
         }
 
-        public Employee Delete(int id)
+        public void Delete(int id)
         {
             Employee employee = _employeeList.FirstOrDefault(e => e.Id.Equals(id));
             if (employee != null)
             {
                 _employeeList.Remove(employee);
             }
-
-            return employee;
         }
     }
 }

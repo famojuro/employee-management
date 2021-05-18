@@ -34,7 +34,7 @@ namespace EmployeeManagement
             
             services.AddMvc().AddXmlSerializerFormatters();
             services.AddScoped<IEmployeeManager, SqlEmployeeManager>();
-            services.AddScoped<IEmployeeDataManager, SqlEmployeeDataManager>();
+            services.AddScoped <IEmployeeDataManager, SqlEmployeeDataManager>();
 
         }
 
@@ -43,13 +43,9 @@ namespace EmployeeManagement
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                app.UseStatusCodePagesWithRedirects("/Error/{0}");
             }
-
-            // FileServerOptions fileServerOptions = new FileServerOptions();
-            // fileServerOptions.DefaultFilesOptions.DefaultFileNames.Clear();
-            // fileServerOptions.DefaultFilesOptions.DefaultFileNames.Add("foo.html");
-
+            
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -69,12 +65,6 @@ namespace EmployeeManagement
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
             
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello world");
-            });
-
-           // app.Use(next => context => throw new Exception("new error found"));
         }
     }
 }

@@ -41,11 +41,9 @@ namespace EmployeeManagement.manager
             return updatedEmployee;
         }
 
-        public Employee DeleteEmployee(int id)
+        public void DeleteEmployee(int id)
         {
-            Employee deletedEmployee = _mockEmployeeDataManager.Delete(id);
-
-            return deletedEmployee;
+            _mockEmployeeDataManager.Delete(id); ;
         }
     }
 }

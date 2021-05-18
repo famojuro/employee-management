@@ -41,11 +41,9 @@ namespace EmployeeManagement.manager
             return updatedEmployee;
         }
 
-        public Employee DeleteEmployee(int id)
+        public void DeleteEmployee(int id)
         {
-            var deletedEmployee = _employeeDataManager.Delete(id);
-
-            return deletedEmployee;
+            _employeeDataManager.Delete(id);
         }
     }
 }

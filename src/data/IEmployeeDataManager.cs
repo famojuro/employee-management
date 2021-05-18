@@ -13,6 +13,6 @@ namespace EmployeeManagement.data
 
         Employee Update(Employee employee);
 
-        Employee Delete(int id);
+        void Delete(int id);
     }
 }

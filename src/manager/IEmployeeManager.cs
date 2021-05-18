@@ -13,7 +13,7 @@ namespace EmployeeManagement.manager
 
         Employee UpdateEmployee(Employee employee);
 
-        Employee DeleteEmployee(int id);
+        void DeleteEmployee(int id);
 
     }
 }
