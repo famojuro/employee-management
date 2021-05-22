@@ -5,6 +5,7 @@ using EmployeeManagement.Models;
 using EmployeeManagement.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace EmployeeManagement.Controllers
 {
@@ -12,12 +13,15 @@ namespace EmployeeManagement.Controllers
     {
         private readonly IEmployeeManager _employeeManager;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly ILogger _logger;
 
-        public HomeController(IEmployeeManager mockEmployeeManager,
-            IWebHostEnvironment webHostEnvironment)
+        public HomeController(IEmployeeManager employeeManager,
+            IWebHostEnvironment webHostEnvironment,
+            ILogger<HomeController> logger)
         {
-            _employeeManager = mockEmployeeManager;
+            _employeeManager = employeeManager;
             _webHostEnvironment = webHostEnvironment;
+            _logger = logger;
         }
         
         public IActionResult Index()
@@ -29,6 +33,7 @@ namespace EmployeeManagement.Controllers
         
         public IActionResult Details(int? id)
         {
+            _logger.LogInformation("Employee details");
             Employee employee = _employeeManager.GetEmployeeDetails(id.Value);
             if (employee == null)
             {
@@ -65,7 +70,8 @@ namespace EmployeeManagement.Controllers
                     PhotoPath = uniqueFileName
                 };
                 _employeeManager.CreateEmployee(newEmployee);
-            
+                _logger.LogInformation("new employee created");
+                
                 return RedirectToAction("details", new {id = newEmployee.Id});    
             }
             
