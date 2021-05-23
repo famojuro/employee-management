@@ -3,6 +3,7 @@ using System.IO;
 using EmployeeManagement.manager;
 using EmployeeManagement.Models;
 using EmployeeManagement.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -24,6 +25,7 @@ namespace EmployeeManagement.Controllers
             _logger = logger;
         }
         
+        [AllowAnonymous]
         public IActionResult Index()
         {
             var model = _employeeManager.GetAllEmployees();
@@ -31,6 +33,7 @@ namespace EmployeeManagement.Controllers
             return View(model);
         }
         
+        [AllowAnonymous]
         public IActionResult Details(int? id)
         {
             _logger.LogInformation("Employee details");
@@ -78,7 +81,7 @@ namespace EmployeeManagement.Controllers
             return View();
         }
         
-        [HttpGet] 
+        [HttpGet]
         public IActionResult Edit(int id)
         {
             Employee employee = _employeeManager.GetEmployeeDetails(id);
